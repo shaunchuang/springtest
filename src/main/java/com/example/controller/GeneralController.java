@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -27,8 +28,11 @@ public class GeneralController {
     }
 
     @RequestMapping("/home")
-    public String home(Model model){
+    public String home(Model model, HttpServletRequest request){
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
         logger.info("Rendering home page with testftl.ftl template");
+        logger.info("從伺服器: {} 的端口 {} 渲染網頁", serverName, serverPort);
         model.addAttribute("testMessage", "FTLtest");
         return "testftl";
     }
